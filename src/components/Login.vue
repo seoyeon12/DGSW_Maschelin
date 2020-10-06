@@ -1,14 +1,18 @@
 <template>
   <div id="login">
       <div class="form" v-show="!isActivity">
-          <button id="btn" @click="login()">로그인</button>
-          <div id="moveBtn">
-            <router-link to="/recommand" id="recommand_btn">장소 추천하기</router-link>
-          </div>
+        <v-btn @click="login()" depressed color="primary">
+          페이스북 로그인
+        </v-btn>
       </div>
       <div class="form" v-show="isActivity">
-          <span>{{ welcomeStr }}</span>
-          <button id="btn" @click="logout()">로그아웃</button>
+        <span style="margin-right:20px">{{ welcomeStr }}</span>
+        <v-btn v-show="ReActivity" @click="recommandBtn()" depressed outlined color="white">
+          맛슐랭 추천하기
+        </v-btn>
+        <v-btn class="ml-3" @click="logout()" depressed outlined color="white">
+          로그아웃
+        </v-btn>
       </div>
   </div>
 </template>
@@ -25,7 +29,8 @@ export default {
   data () {
     return {
       name: '',
-      isActivity: false
+      isActivity: false,
+      ReActivity: true
     }
   },
   created () {
@@ -33,7 +38,16 @@ export default {
   },
   computed: {
     welcomeStr () {
-      return name + ' 님, 환영합니다.'
+      return this.name + ' 님, 환영합니다.'
+    }
+  },
+  watch: {
+    $route (to, from) {
+      if (to.name === 'Recommand') {
+        this.ReActivity = false
+      } else {
+        this.ReActivity = true
+      }
     }
   },
   methods: {
@@ -49,28 +63,41 @@ export default {
     login () {
       firebase.auth().signInWithPopup(provider).then(result => {
         // This gives you a Facebook Access Token.
-        var token = result.credential.accessToken
+        // var token = result.credential.accessToken
         // The signed-in user info.
         var user = result.user
-        console.log(token)
-        console.log(user)
+        // console.log(token)
         this.name = user.displayName
         sessionStorage.setItem('user_name', this.name)
+        sessionStorage.setItem('user_id', user.uid)
         this.isActivity = true
       }).catch(function (error) {
         console.log(error)
-        alert('에러 : ' + error.message)
+        alert('로그인 실패 에러 : ' + error.message)
       })
     },
     logout () {
-      this.isActivity = false
-      firebase.auth().signOut().then(function () {
-        console.log('Successful Logout')
-        sessionStorage.clear()
-      }).catch(function (error) {
-        console.log('Failed Logout')
-        console.log(error)
-      })
+      if (this.checkLogout()) {
+        this.isActivity = false
+        firebase.auth().signOut().then(function () {
+          console.log('Successful Logout')
+          alert('로그아웃하였습니다.')
+          sessionStorage.clear()
+        }).catch(function (error) {
+          console.log('Failed Logout')
+          alert('로그아웃에 실패했습니다.')
+          console.log(error)
+        })
+      }
+    },
+    checkLogout () {
+      var ckeck = confirm('로그아웃 하시겠습니까?')
+      console.log(ckeck)
+      return ckeck
+    },
+    recommandBtn () {
+      this.$emit('loginMove')
+      // this.$router.push('/recommand')
     }
   }
 }
@@ -78,10 +105,6 @@ export default {
 
 <style>
 #login{
-  position: absolute;
-  top: 0;
-  right: 0;
-  width: 100px;
-  z-index: 1;
+  color: #ffffff;
 }
 </style>

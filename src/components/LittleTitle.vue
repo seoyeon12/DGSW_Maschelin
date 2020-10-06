@@ -14,9 +14,6 @@ export default {
 
 <style>
 #littleTitle{
-    position: absolute;
-    top: 30px;
-    left: 30px;
-    color: white;
+  color: white;
 }
 </style>

@@ -1,22 +1,18 @@
 <template>
   <div class="home">
     <img id="bg_img" src="@/assets/main.jpg" alt="Main Background Picturs">
-    <LittleTitle></LittleTitle>
-    <Login></Login>
     <div class="main_section">
       <MainTitle></MainTitle>
     </div>
     <div class="notice_section">
       <Notice @send-checkig="isActiveList"></Notice>
     </div>
-    <StoreList v-if="isListActivity" v-bind:propStoreList="storeList"></StoreList>
+    <StoreList class="StoreList" v-if="isListActivity" v-bind:propStoreList="storeList"></StoreList>
   </div>
 </template>
 
 <script>
 // @ is an alias to /src
-import Login from '@/components/Login.vue'
-import LittleTitle from '@/components/LittleTitle.vue'
 import MainTitle from '@/components/MainTitle.vue'
 import Notice from '@/components/Notice.vue'
 import StoreList from '@/components/StoreList.vue'
@@ -34,9 +30,7 @@ export default {
     }
   },
   components: {
-    Login,
     MainTitle,
-    LittleTitle,
     Notice,
     StoreList
   },
@@ -45,6 +39,7 @@ export default {
   },
   mounted () {
     this.isActiveList()
+    // console.log('Home.vue Mounted len :  ' + window.localStorage.length)
   },
   methods: {
     getStoreList () {
@@ -55,7 +50,9 @@ export default {
           if (key === 'loglevel:webpack-dev-server') {
             console.log('Pass')
           } else {
+            // console.log('Push')
             this.storeList.push(localStorage[key])
+            // this.$set(this.storeList.push(localStorage[key]))
           }
         }
       }
@@ -63,6 +60,8 @@ export default {
     isActiveList () {
       if (sessionStorage.getItem('isChecking')) {
         this.isListActivity = true
+      } else {
+        this.isListActivity = false
       }
     }
   }
@@ -76,16 +75,24 @@ export default {
   left: 0;
   width: 100%;
   filter: brightness(0.5);
-  min-width: 1400px;
+  animation: blackout;
+  animation-delay: 5s;
+  animation-duration: 10s;
+  animation-fill-mode: forwards;
 }
-#moveBtn{
-  z-index: 1;
-}
+/* #bg_white{
+  position: absolute;
+  width: 100%;
+  height: 50vh;
+  background-color: #efefef;
+  left: 0;
+  bottom: 0;
+} */
 .main_section{
   position: relative;
   overflow: hidden;
   width: 100%;
-  height: 100vh;
+  height: 50vh;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -93,7 +100,18 @@ export default {
 .notice_section{
   position: relative;
   width: 100%;
-  z-index: 2;
   margin-bottom: 50px;
+}
+.StoreList{
+  position: relative;
+  width: 100%;
+}
+@-webkit-keyframes blackout {
+  from{
+    filter: brightness(0.5);
+  }
+  to{
+    filter: brightness(0.2);
+  }
 }
 </style>
