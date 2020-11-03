@@ -1,12 +1,18 @@
 <template>
+<!-- <Home.vue> VSheet가 부모, path가 '/'인 라우터 -->
+<!-- <App.vue>에서 router-view로 호출된다. 형제 컴포넌트 : VBtn, VContainer -->
+<!-- 화면의 구성을(자식 컴포넌트 : MainTitle, Notice, StoreList) 컨트롤하는 컴포넌트 -->
   <div class="home">
     <img id="bg_img" src="@/assets/main.jpg" alt="Main Background Picturs">
     <div class="main_section">
       <MainTitle></MainTitle>
     </div>
     <div class="notice_section">
+      <!-- send-checkig / 버튼이 클릭되었다는 신호 -->
       <Notice @send-checkig="isActiveList"></Notice>
     </div>
+    <!-- v-if / 주의사황 숙지 및 메인 목록 보여주기 활성화 여부 확인  -->
+    <!-- v-bind / storeList : 데이터베이스로부터 불러온 "가게들" 정보  -->
     <StoreList class="StoreList" v-if="isListActivity" v-bind:propStoreList="storeList"></StoreList>
   </div>
 </template>
@@ -17,16 +23,12 @@ import MainTitle from '@/components/MainTitle.vue'
 import Notice from '@/components/Notice.vue'
 import StoreList from '@/components/StoreList.vue'
 
-// watch()로 router 감시를 통해 상세보기에서 넘어온다면 메인의 목록 보여주기는 활성화시킨다.
-// 만약 상세보기가 아닌 새로 페이지를 로드했을 경우 버튼을 누르면 목록을 보여준다.
-
-// 컴포넌트가 재사용되는 거라서 once 속성이 먹히면 once를 이용해서 한 세션에서는 계속 메인의 목록을 보여준다.
 export default {
   name: 'Home',
   data () {
     return {
-      isListActivity: false,
-      storeList: []
+      isListActivity: false, // 주의사항 숙지 여부, 메인 목록 보여주기 활성화 여부
+      storeList: [] // 가게들 정보
     }
   },
   components: {
@@ -42,6 +44,8 @@ export default {
     // console.log('Home.vue Mounted len :  ' + window.localStorage.length)
   },
   methods: {
+    // 임시 개발용 함수
+    // localhost로 실행했을 때만 생기는 불필요한 데이터 삭제
     getStoreList () {
       var len = localStorage.length
       if (len > 0) {
@@ -57,6 +61,7 @@ export default {
         }
       }
     },
+    // 세션 스토리지 참조, 주의사항을 확인했다면 true를 아니라면 flase
     isActiveList () {
       if (sessionStorage.getItem('isChecking')) {
         this.isListActivity = true
@@ -80,14 +85,6 @@ export default {
   animation-duration: 10s;
   animation-fill-mode: forwards;
 }
-/* #bg_white{
-  position: absolute;
-  width: 100%;
-  height: 50vh;
-  background-color: #efefef;
-  left: 0;
-  bottom: 0;
-} */
 .main_section{
   position: relative;
   overflow: hidden;

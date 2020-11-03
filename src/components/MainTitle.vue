@@ -1,4 +1,6 @@
 <template>
+<!-- <MainTitle.vue> Home이 부모이며 <Home.vue>에서 호출된다. -->
+<!-- 메인화면의 큰 제목 -->
   <div id="mainTitle">
       <div class="font_black">WELCOME TO</div>
       <div class="font_bold">대소고 맛슐랭</div>

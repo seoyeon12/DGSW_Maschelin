@@ -1,4 +1,7 @@
 <template>
+<!-- <Notice.vue> Home이 부모 <Home.vue>에서 호출된다.-->
+<!-- 주의사항을 안내하는 컴포넌트 (버튼 클릭 시 세션스토리지에 저장되며 이는 한 번만 실행된다.)-->
+<!-- emit : send-checkig / Home.vue에서 받는다.-->
   <div id="notice">
     <v-card elevation="2" shaped class="font_bold">
         <span class="noticeTitle">주의</span>

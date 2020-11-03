@@ -1,11 +1,11 @@
 <template>
+<!-- <StoreList.vue> 가게 정보 리스트 + 가게 클릭 이벤트 -->
+<!-- Home.vue에서 호출됨. props : propStoreList -->
   <div id="storeList">
-      <!-- <TopLine></TopLine> -->
       <div class="sectionUl">
         <div class="sectionCen">
           <div v-for="(store, index) in propStoreList" :key="store" class="item" @click="moveToDetail(store)">
-            <!-- {{ store }} ::::  -->
-            <!-- 인덱스 값을 /details에 넘겨주면 localstorage에서 해당 인덱스 값으 검색 -->
+            <!-- 가게 정보와 생략여부(false)를 item(StoreItem)에 넘겨준다. -->
             <Item v-bind:store="store" v-bind:detail=false v-bind:class="index"></Item>
           </div>
         </div>
@@ -17,11 +17,13 @@
 import Item from '@/components/StoreItem.vue'
 
 export default {
+  // 가게들의 정보
   props: ['propStoreList'],
   components: {
     Item
   },
   methods: {
+    // 각 가게마다 클릭하면 상세보기 페이지로 이동. + 클릭된 가게 정보 전달
     moveToDetail (store) {
       // console.log(store)
       this.$router.push({ name: 'Details', params: { store: store } })

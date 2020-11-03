@@ -1,11 +1,15 @@
 <template>
+<!-- <Details.vue> VSheet가 부모, path가 '/details'인 라우터 -->
+<!-- <App.vue>에서 router-view로 호출된다. 형제 컴포넌트 : VBtn, VContainer -->
+<!-- 화면의 구성을(자식 컴포넌트 : StoreItem, AddReview, LoadReview) 컨트롤하는 컴포넌트 -->
   <div class="details">
-    <!-- <h2>{{ $route.params.store }}</h2> -->
-    <!-- <h2>{{ store }}</h2> -->
+    <!-- <h2>{{ $route.params.store }}</h2> == <h2>{{ store }}</h2> -->
     <v-row justify="center">
+      <!-- 가게 정보와 생략여부(true)를 item(StoreItem)에 넘겨준다. -->
       <Item v-bind:store="item" v-bind:detail=true></Item>
       <AddReview v-show="loginState" v-bind:placeId="placeId" @reviewDone="addReviewDone"></AddReview>
     </v-row>
+
     <v-row justify="center">
       <v-btn text color="primary">
         <router-link to="/">HOME으로 돌아가기</router-link>
@@ -17,6 +21,7 @@
         리뷰작성하기
       </v-btn>
     </v-row>
+
     <v-row>
       <LoadReview v-if="isActive" v-bind:placeId="placeId"></LoadReview>
     </v-row>
