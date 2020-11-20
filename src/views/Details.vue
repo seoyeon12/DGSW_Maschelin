@@ -7,6 +7,7 @@
     <v-row justify="center">
       <!-- 가게 정보와 생략여부(true)를 item(StoreItem)에 넘겨준다. -->
       <Item v-bind:store="item" v-bind:detail=true></Item>
+      <!-- 리뷰 작성하는 컴포넌트, 가게 정보 중 placeId를 넘겨준다. -->
       <AddReview v-show="loginState" v-bind:placeId="placeId" @reviewDone="addReviewDone"></AddReview>
     </v-row>
 
@@ -35,7 +36,7 @@ import AddReview from '@/components/AddReview.vue'
 
 export default {
   name: 'Details',
-  props: ['store'],
+  props: ['store'], // StoreList.vue에서 라우터를 통해 가게 정보를(store) 받는다.
   data () {
     return {
       item: [],

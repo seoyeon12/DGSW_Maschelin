@@ -1,4 +1,6 @@
 <template>
+<!-- <AddReview.vue> 리뷰 작성하기 컴포넌트입니다. -->
+<!-- Details.vue에서 호출됨. props : placeId -->
   <v-card
     class="my-12 ml-8"
     width="350"
