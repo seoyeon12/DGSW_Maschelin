@@ -1,8 +1,8 @@
-<template>
-  <div class="recommand">
+<template class="mt-15">
+  <div class="recommand" style="margin-top: 100px;">
     <v-card
-    class="mx-auto mt-15"
-    max-width="700"
+    class="mx-auto mt-16"
+    max-width="800"
     >
       <v-card-title class="text-h2 font-weight-bold">맛슐랭 추천하기</v-card-title>
 
@@ -28,6 +28,13 @@
           hide-details="auto"
           v-model="placeId"
         ></v-text-field>
+        <v-text-field
+          class="mx-3 my-3 pt-2"
+          label="가게 그림 링크"
+          :rules="rules"
+          hide-details="auto"
+          v-model="thumbnail"
+        ></v-text-field>
         <v-textarea
           class="mx-3 my-3 pt-2"
           clearable
@@ -41,13 +48,12 @@
           <v-btn color="dark" dark rounded @click="addStore">
             추천하기
           </v-btn>
+          <v-btn class="mx-lg-auto" text dark rounded color="dark">
+            <router-link to="/">HOME으로 돌아가기</router-link>
+          </v-btn>
         </v-row>
       </v-card-text>
     </v-card>
-
-    <v-btn class="mx-lg-auto" text color="primary">
-      <router-link to="/">HOME으로 돌아가기</router-link>
-    </v-btn>
   </div>
 </template>
 
@@ -63,7 +69,8 @@ export default {
     name: '',
     reson: '',
     address: '',
-    placeId: ''
+    placeId: '',
+    thumbnail: ''
   }),
   methods: {
     checkEmpty () {
@@ -85,7 +92,8 @@ export default {
         placeId: this.placeId,
         reson: this.reson,
         starCounter: 0,
-        starTotal: 0
+        starTotal: 0,
+        thumbnail: this.thumbnail
       }
 
       if (this.checkEmpty && this.checkAgree()) {
@@ -108,7 +116,3 @@ export default {
   }
 }
 </script>
-
-<style>
-
-</style>
