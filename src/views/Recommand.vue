@@ -23,7 +23,7 @@
         ></v-text-field>
         <v-text-field
           class="mx-3 my-3 pt-2"
-          label="장소 ID"
+          label="장소 ID를 정해주세요 (ex. 23Lefd)/숫자+영어"
           :rules="rules"
           hide-details="auto"
           v-model="placeId"
@@ -84,8 +84,7 @@ export default {
       return confirm('추천하시겠습니까?')
     },
     addStore () {
-      this.checkEmpty()
-
+      // this.checkEmpty()
       var data = {
         address: this.address,
         name: this.name,

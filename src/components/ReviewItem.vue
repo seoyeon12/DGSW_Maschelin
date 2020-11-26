@@ -9,7 +9,7 @@
 
       <v-card-text>
         <div class="my-2 subtitle-1 address">
-          {{ name }}
+          {{ nameMoza }}
         </div>
 
         <v-row
@@ -56,6 +56,13 @@ export default {
   created () {
     this.readyToData()
   },
+  computed: {
+    // 이름 모자이크 처리 ex : 이*연, 모*리자
+    nameMoza () {
+      var orginalName = this.name.substr(0, 1) + '*' + this.name.substr(2, this.name.length)
+      return orginalName
+    }
+  },
   methods: {
     readyToData () {
       this.item = JSON.parse(this.review)
@@ -67,7 +74,3 @@ export default {
   }
 }
 </script>
-
-<style>
-
-</style>
