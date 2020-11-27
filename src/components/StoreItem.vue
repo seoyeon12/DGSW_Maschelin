@@ -32,14 +32,14 @@
         </div>
       </v-row>
 
-      <div class="my-2 subtitle-1 address" v-show="!isActive">
+      <div class="my-2 subtitle-1 address wi3" v-show="!isActive">
         {{ storeReson }}
       </div>
       <div class="my-2 subtitle-1" v-show="isActive">
         {{ storeReson }}
       </div>
 
-      <div class="address" v-show="!isActive">{{ storeAddress }}</div>
+      <div class="address wi3" v-show="!isActive">{{ storeAddress }}</div>
       <div v-show="isActive">{{ storeAddress }}</div>
     </v-card-text>
   </v-card>
@@ -103,9 +103,11 @@ export default {
 
 <style>
 .address{
-  width: 300px;
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
+}
+.wi3{
+  width: 300px;
 }
 </style>

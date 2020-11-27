@@ -54,7 +54,8 @@ export default {
     checkingLogin () {
       var name = sessionStorage.getItem('user_name')
       if (name == null) {
-        console.log('It is Null')
+        alert('로그인 후 이용가능합니다.')
+        this.moveToPage()
       } else {
         this.isActivity = true
         this.name = name
@@ -80,14 +81,16 @@ export default {
       if (this.checkLogout()) {
         this.isActivity = false
         firebase.auth().signOut().then(function () {
-          console.log('Successful Logout')
-          alert('로그아웃하였습니다.')
+          // console.log('Successful Logout')
+          // alert('로그아웃하였습니다.')
+          alert('로그아웃되었습니다. 홈 화면으로 돌아갑니다.')
           sessionStorage.clear()
         }).catch(function (error) {
-          console.log('Failed Logout')
-          alert('로그아웃에 실패했습니다.')
+          // console.log('Failed Logout')
+          alert('로그아웃에 실패했습니다. 홈 화면으로 돌아갑니다.')
           console.log(error)
         })
+        this.moveToPage()
       }
     },
     checkLogout () {
@@ -98,6 +101,9 @@ export default {
     recommandBtn () {
       this.$emit('loginMove')
       // this.$router.push('/recommand')
+    },
+    moveToPage () {
+      this.$router.push('/')
     }
   }
 }

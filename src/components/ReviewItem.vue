@@ -35,7 +35,7 @@
           {{ menu }}
         </div>
 
-        <div class="address">{{ context }}</div>
+        <div class="address" style="margin: 0, width:100%">{{ context }}</div>
       </v-card-text>
     </v-card>
   </div>
@@ -55,6 +55,7 @@ export default {
   },
   created () {
     this.readyToData()
+    // console.log(this.review)
   },
   computed: {
     // 이름 모자이크 처리 ex : 이*연, 모*리자

@@ -52,7 +52,7 @@ export default {
         for (var i = 0; i < len; i++) {
           var key = localStorage.key(i)
           if (key === 'loglevel:webpack-dev-server') {
-            console.log('Pass')
+            // console.log('Pass')
           } else {
             // console.log('Push')
             this.storeList.push(localStorage[key])

@@ -67,7 +67,7 @@ export default {
   },
   created () {
     this.store = JSON.parse(localStorage.getItem(this.placeId))
-    console.log(this.store)
+    // console.log(this.store)
   },
   methods: {
     updateRating () {

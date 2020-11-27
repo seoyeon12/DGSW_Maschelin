@@ -21,7 +21,7 @@ export default {
     }
   },
   created () {
-    console.log('LoadReview Created Start')
+    // console.log('LoadReview Created Start')
     this.loadReview()
   },
   methods: {
@@ -30,12 +30,18 @@ export default {
 
       docRef.collection('review').get().then((querySnapshot) => {
         querySnapshot.forEach((doc) => {
-        // console.log(doc.id + '  =>  ' + JSON.stringify(doc.data()))
+          // console.log(doc.id + '  =>  ' + JSON.stringify(doc.data()))
+          // console.log(typeof doc.data() + '  =>  ' + typeof JSON.stringify(doc.data()))
           this.reviewList.push(JSON.stringify(doc.data()))
         })
+        this.checkReview()
       })
-
-      console.log(this.reviewList)
+    },
+    checkReview () {
+      if (this.reviewList.length === 0) {
+        var nullRe = '{ "menu":"0", "owner":"0", "name":"0", "context":"등록된 리뷰가 없습니다. 첫번째 리뷰를 작성해주세요!", "img":""}'
+        this.reviewList.push(nullRe)
+      }
     }
   }
 }

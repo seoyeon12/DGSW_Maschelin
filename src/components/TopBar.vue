@@ -5,7 +5,7 @@
         elevate-on-scroll
         scroll-target="#scrolling-techniques-7"
     >
-        <div class="d-flex align-center">
+        <div class="d-flex align-center" id="logoHov" @click="MoveToHome">
             <LittleTitle></LittleTitle>
         </div>
 
@@ -41,11 +41,16 @@ export default {
   methods: {
     loginMove () {
       this.$router.push('/recommand')
+    },
+    MoveToHome () {
+      this.$router.push('/')
     }
   }
 }
 </script>
 
 <style>
-
+#logoHov:hover{
+  cursor: pointer;
+}
 </style>
